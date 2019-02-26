@@ -6,7 +6,7 @@ SCRIPT_NAME    = "NickrBot"
 SCRIPT_AUTHOR  = "innerlite"
 SCRIPT_VERSION = "0.01"
 SCRIPT_LICENSE = "GPL3"
-SCRIPT_DESC    = "NickrBot, The short & effective Nick(regain) Grabber for headless irc networks"
+SCRIPT_DESC    = "NickrBot, The short & effective Nick(regain)Bot for headless irc networks"
 
 if w.register(SCRIPT_NAME, SCRIPT_AUTHOR, SCRIPT_VERSION, SCRIPT_LICENSE,
               SCRIPT_DESC, '', ''):
