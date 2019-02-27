@@ -2,11 +2,11 @@
 
 import weechat as w
 
-SCRIPT_NAME    = "PickNick"
+SCRIPT_NAME    = "picknick"
 SCRIPT_AUTHOR  = "innerlite"
-SCRIPT_VERSION = "0.02a"
+SCRIPT_VERSION = "0.02b"
 SCRIPT_LICENSE = "GPL3"
-SCRIPT_DESC    = "PickNick, The short & effective nick regainer for 'headless' irc networks"
+SCRIPT_DESC    = "picknick, The short & effective nick regainer on the network you choose!"
 
 if w.register(SCRIPT_NAME, SCRIPT_AUTHOR, SCRIPT_VERSION, SCRIPT_LICENSE,
               SCRIPT_DESC, '', ''):
@@ -18,7 +18,7 @@ if w.register(SCRIPT_NAME, SCRIPT_AUTHOR, SCRIPT_VERSION, SCRIPT_LICENSE,
 def timer_cb(server_name, signal):
     w.prnt('', '==>\t%s' % (server_name))
     il = w.infolist_get("irc_server", "", server_name)
-    sbuffer = w.buffer_search("irc", server_name + "#")
+    sbuffer = w.buffer_search("irc", server_name + "#cyberworld")
     cur_nick = ''
     forced_nick = ''
     if w.infolist_next(il):
