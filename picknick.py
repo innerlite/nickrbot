@@ -12,7 +12,9 @@ if w.register(SCRIPT_NAME, SCRIPT_AUTHOR, SCRIPT_VERSION, SCRIPT_LICENSE,
               SCRIPT_DESC, '', ''):
     w.hook_signal("irc_server_connected", SCRIPT_NAME, "")
 	
-#zonder deze var werkt het script ook omdat de string in de conf leeg is, probleem is dat het op elke server/buffer de nick veranderd (met of zonder deze variable).
+"""zonder deze var werkt het script ook omdat de string in de conf leeg is, probleem is dat het op elke 
+server/buffer de nick veranderd (met of zonder deze variable) ook heb ik in de timerfunctie de variable weggehaald <?."""
+
 #test = w.config_string(w.config_get("irc.server_default.addresses"))
 
 def timer_cb(server_name, signal):
