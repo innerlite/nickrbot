@@ -9,7 +9,7 @@ w.register('picknick', 'innerlite', '1.0b', 'GPL3', 'Simplest nick regainer for 
 
 cnetwork = 'ircnet,# ' #replace only the name ircnet with your own added network name
 
-def ccheck(server_name, signal):
+def ccheck(server_name, data):
     ci = w.infolist_get('irc_server', '', server_name)
     pbuffer = w.info_get('irc_buffer', cnetwork)
     cnick = ''
