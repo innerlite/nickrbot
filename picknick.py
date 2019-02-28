@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # innerlite Amsterdam 2019, poort587@gmail.com
 # Picknick is an oldschool nick regainer, it will check every 2 minutes
-# to take back the configurated nickname 
-# in your weechat settings for networks without NickServ.
+# to take back the setted nickname in your 
+# weechat config., for networks without NickServ.
 
 import weechat as w
 
