@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # innerlite Amsterdam 2019, poort587@gmail.com
-# Picknick is a oldschool nick regainer, it will check every 3 minutes
+# Picknick is an oldschool nick regainer, it will check every 3 minutes
 # to get the taken nick back on the setted network without NickServ.
 
 import weechat as w
