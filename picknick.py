@@ -16,8 +16,8 @@ def ccheck(server_name, data):
     cfnick = ''
     if w.infolist_next(ci):
         cnick = w.infolist_string(ci, 'nick')
-        nicks = w.infolist_string(ci, 'nicks')
-        cfnick = nicks.split(',')[0]
+        cnicks = w.infolist_string(ci, 'nicks')
+        cfnick = cnicks.split(',')[0]
     w.infolist_free(ci)
     if (cnick != cfnick):
         w.command(pbuffer, '/nick %s' % (cfnick))
