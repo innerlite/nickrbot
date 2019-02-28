@@ -1,38 +1,32 @@
 # -*- coding: utf-8 -*-
+# innerlite Amsterdam 2019, poort587@gmail.com
+# Picknick is a oldschool nick regainer, it will check every 3 minutes
+# to get the taken nick back on the setted network without NickServ.
 
 import weechat as w
 
-SCRIPT_NAME    = "picknick"
-SCRIPT_AUTHOR  = "innerlite"
-SCRIPT_VERSION = "0.02b"
-SCRIPT_LICENSE = "GPL3"
-SCRIPT_DESC    = "picknick, The short & effective nick regainer on the network you choose!"
+cname    = "picknick"
+cauthor  = "innerlite"
+cversion = "1.0b"
+clicense = "GPL3"
+cdesc    = "picknick, The short & effective nick regainer"
 
-if w.register(SCRIPT_NAME, SCRIPT_AUTHOR, SCRIPT_VERSION, SCRIPT_LICENSE,
-              SCRIPT_DESC, '', ''):
-    w.hook_signal("irc_server_connected", SCRIPT_NAME, "")
-	
-"""zonder deze var werkt het script ook omdat de string in de conf leeg is, probleem is dat het op elke 
-server/buffer de nick veranderd (met of zonder deze variable) ook heb ik in de timerfunctie de variable weggehaald <?."""
+if w.register(cname, cauthor, cversion, clicense,
+              cdesc, '', ''):
+    w.hook_signal("irc_server_connected", cname, "")
 
-#test = w.config_string(w.config_get("irc.server_default.addresses"))
-
-def timer_cb(server_name, signal):
-    w.prnt('', '==>\t%s' % (server_name))
-    il = w.infolist_get("irc_server", "", server_name)
-    sbuffer = w.buffer_search("irc", server_name + "#cyberworld")
-    cur_nick = ''
-    forced_nick = ''
-    if w.infolist_next(il):
-        cur_nick = w.infolist_string(il, 'nick')
-        nicks = w.infolist_string(il, 'nicks')
-        forced_nick = nicks.split(',')[0]
-#        password = w.infolist_string(il, 'password')
-    w.infolist_free(il)
-    if (cur_nick != forced_nick):
-        w.command(sbuffer, "/nick %s" % (forced_nick))
-#        w.command(sbuffer, "/msg nickserv ghost %s %s" % (forced_nick, password))
-#        w.command(sbuffer, "/msg nickserv identify %s" % (password))
+def ccheck(server_name, signal):
+    ci = w.infolist_get("irc_server", "", server_name)
+    pbuffer = w.info_get("irc_buffer", "ircnet,# ")
+    cnick = ''
+    cfnick = ''
+    if w.infolist_next(ci):
+        cnick = w.infolist_string(ci, 'nick')
+        nicks = w.infolist_string(ci, 'nicks')
+        cfnick = nicks.split(',')[0]
+    w.infolist_free(ci)
+    if (cnick != cfnick):
+        w.command(pbuffer, "/nick %s" % (cfnick))
     return w.WEECHAT_RC_OK
 
-w.hook_timer(1000, 0, 0, 'timer_cb', '')
+w.hook_timer(180000, 0, 0, 'ccheck', '')
