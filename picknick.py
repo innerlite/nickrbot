@@ -7,7 +7,7 @@ import weechat as w
 
 w.register('picknick', 'innerlite', '1.0b', 'GPL3', 'Simplest nick regainer for networks without NickServ', '', '')
 
-cnetwork = 'ircnet,# ' #replace only the name ircnet with your own added network name
+cnetwork = 'ircnet,# ' #replace only the name ircnet with your own added network name.
 
 def ccheck(server_name, data):
     ci = w.infolist_get('irc_server', '', server_name)
@@ -23,4 +23,4 @@ def ccheck(server_name, data):
         w.command(pbuffer, '/nick %s' % (cfnick))
     return w.WEECHAT_RC_OK
 
-w.hook_timer(120000, 0, 0, 'ccheck', '')
+w.hook_timer(120000, 0, 0, 'ccheck', '') #change the timer interval here in milliseconds (120000 = 2min. = default).
