@@ -1,23 +1,17 @@
 # -*- coding: utf-8 -*-
 # innerlite Amsterdam 2019, poort587@gmail.com
-# Picknick is an oldschool nick regainer, it will check every 3 minutes
-# to get the taken nick back on the setted network without NickServ.
+# Picknick is an oldschool nick regainer, it will check every 2 minutes
+# to get the taken nick back on networks without NickServ.
 
 import weechat as w
 
-cname    = "picknick"
-cauthor  = "innerlite"
-cversion = "1.0b"
-clicense = "GPL3"
-cdesc    = "picknick, The short & effective nick regainer"
+w.register('picknick', 'innerlite', '1.0b', 'GPL3', 'Simplest nick regainer for networks without NickServ', '', '')
 
-if w.register(cname, cauthor, cversion, clicense,
-              cdesc, '', ''):
-    w.hook_signal("irc_server_connected", cname, "")
+cnetwork = 'ircnet,# ' #replace only the name ircnet with your own added network name
 
 def ccheck(server_name, signal):
-    ci = w.infolist_get("irc_server", "", server_name)
-    pbuffer = w.info_get("irc_buffer", "ircnet,# ")
+    ci = w.infolist_get('irc_server', '', server_name)
+    pbuffer = w.info_get('irc_buffer', cnetwork)
     cnick = ''
     cfnick = ''
     if w.infolist_next(ci):
@@ -26,7 +20,7 @@ def ccheck(server_name, signal):
         cfnick = nicks.split(',')[0]
     w.infolist_free(ci)
     if (cnick != cfnick):
-        w.command(pbuffer, "/nick %s" % (cfnick))
+        w.command(pbuffer, '/nick %s' % (cfnick))
     return w.WEECHAT_RC_OK
 
-w.hook_timer(180000, 0, 0, 'ccheck', '')
+w.hook_timer(120000, 0, 0, 'ccheck', '')
