@@ -37,7 +37,6 @@ def wtrigger(data, buffer, args):
         knick = w.info_get("irc_nick_from_host", args)
 #        query = query.replace(" ", "%20")
         query = query.replace(" ", "")
-#        w.hook_process('*', 30 * 1000, "wbuffer", "")
         auto_cmd = " ".format(query)
 
         w.hook_process(auto_cmd, 30 * 1000, "wbuffer", "")
@@ -49,21 +48,23 @@ def wbuffer(reaction, data, command, out, er):
     buffer = w.info_get("irc_buffer", rtnbuf)
     botnick = w.info_get("irc_nick", kserver)
     if kchannel == botnick:
+
         #in private
 
 #        command = "msg {} {}".format(knick, reaction) origineel
         if mode == 'op': command = "op {} {}".format(knick, query)
         if mode == 'kick': command = "kick {} {}".format(knick, query)
-        if mode == 'ban': command = "ban {} {}".format(knick, query)
+        if mode == 'ban': command = "kickban {} {}".format(knick, query)
         if mode == 'voice': command = "voice {} {}".format(knick, query)    
 
     else:
+
         #on channel
 
             if mode == 'op': command = "op {} {}".format(kchannel, query)
             if mode == 'kick': command = "kick {} {}".format(kchannel, query)
-            if mode == 'ban': command = "ban {} {}".format(kchannel, query)
-            if mode == 'voice': command = "voice {} {}".format(kchannel, query)       
+            if mode == 'ban': command = "kickban {} {}".format(kchannel, query)
+            if mode == 'voice': command = "voice {} {}".format(knick, query)       
 
     cmdprefix = "/"
     w.command(buffer, cmdprefix + command)
@@ -108,23 +109,3 @@ if __name__ == "__main__":
 # start
 w.hook_signal("*,irc_in_privmsg", "wtrigger", "data")
 w.hook_config("{}.*".format(plugin_config), "config_cb", "")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
