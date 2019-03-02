@@ -19,19 +19,27 @@ def wtrigger(data, buffer, args):
             mode = "op"
         except ValueError:
             try:
-                kchannel, query = srvmsg.split(" :{} ".format(options["kick_trigger"]), 1)
-                mode = "kick"
-            except ValueError:
+                kchannel, query = srvmsg.split(" :{} ".format(options["deop_trigger"]), 1)
+                mode = "deop"
+            except ValueError:    
                 try:
-                    kchannel, query = srvmsg.split(" :{} ".format(options["ban_trigger"]), 1) 
-                    mode = "ban"
+                    kchannel, query = srvmsg.split(" :{} ".format(options["kick_trigger"]), 1)
+                    mode = "kick"
                 except ValueError:
                     try:
-                        kchannel, query = srvmsg.split(" :{} ".format(options["voice_trigger"]), 1)
-                        mode = "voice"
-                    except ValueError:    
+                        kchannel, query = srvmsg.split(" :{} ".format(options["ban_trigger"]), 1) 
+                        mode = "ban"
+                    except ValueError:
+                        try:
+                            kchannel, query = srvmsg.split(" :{} ".format(options["voice_trigger"]), 1)
+                            mode = "voice"
+                        except ValueError:
+                            try:
+                                kchannel, query = srvmsg.split(" :{} ".format(options["devoice_trigger"]), 1)
+                                mode = "devoice"
+                            except ValueError:  
 
-                        return w.WEECHAT_RC_OK
+                                return w.WEECHAT_RC_OK
 
         kserver = str(buffer.split(",", 1)[0])
         knick = w.info_get("irc_nick_from_host", args)
@@ -53,18 +61,22 @@ def wbuffer(reaction, data, command, out, er):
 
 #        command = "msg {} {}".format(knick, reaction) origineel
         if mode == 'op': command = "op {} {}".format(knick, query)
+        if mode == 'deop': command = "deop {} {}".format(knick, query)
         if mode == 'kick': command = "kick {} {}".format(knick, query)
         if mode == 'ban': command = "kickban {} {}".format(knick, query)
-        if mode == 'voice': command = "voice {} {}".format(knick, query)    
+        if mode == 'voice': command = "voice {} {}".format(knick, query)
+        if mode == 'devoice': command = "devoice {} {}".format(knick, query)   
 
     else:
 
         #on channel
 
             if mode == 'op': command = "op {} {}".format(kchannel, query)
+            if mode == 'deop': command = "deop {} {}".format(kchannel, query)
             if mode == 'kick': command = "kick {} {}".format(kchannel, query)
             if mode == 'ban': command = "kickban {} {}".format(kchannel, query)
-            if mode == 'voice': command = "voice {} {}".format(kchannel, query)       
+            if mode == 'voice': command = "voice {} {}".format(kchannel, query)
+            if mode == 'devoice': command = "devoice {} {}".format(kchannel, query)   
 
     cmdprefix = "/"
     w.command(buffer, cmdprefix + command)
@@ -87,9 +99,11 @@ def get_option(option):
 plugin_config = "plugins.var.python.{}".format(SCRIPT_NAME)
 default_options = {"enabled": 'on',
                    "op_trigger": '!op',
+                   "deop_trigger": '!deop',
                    'kick_trigger': '!kick',
                    "ban_trigger": '!ban',
-                   "voice_trigger": '!voice'}
+                   "voice_trigger": '!voice',
+                   "devoice_trigger": '!devoice'}
 
 
 if __name__ == "__main__":
@@ -100,9 +114,11 @@ if __name__ == "__main__":
 
         options = {"enabled": get_option("enabled"),
                    "op_trigger": get_option("op_trigger"),
+                   "deop_trigger": get_option("deop_trigger"),
                    "kick_trigger": get_option("kick_trigger"),
                    "ban_trigger": get_option("ban_trigger"),
-                   "voice_trigger": get_option("voice_trigger")
+                   "voice_trigger": get_option("voice_trigger"),
+                   "devoice_trigger": get_option("devoice_trigger")
                   }  
 ### end weechat plugin configuration stuff ####
 
