@@ -13,7 +13,6 @@ def wtrigger(data, buffer, args):
             null, srvmsg = args.split(" PRIVMSG ", 1)
         except:
             return w.WEECHAT_RC_OK
-
         try:
             kchannel, query = srvmsg.split(" :{} ".format(options["op_trigger"]), 1)
             mode = "op"
@@ -38,7 +37,6 @@ def wtrigger(data, buffer, args):
                                 kchannel, query = srvmsg.split(" :{} ".format(options["devoice_trigger"]), 1)
                                 mode = "devoice"
                             except ValueError:  
-
                                 return w.WEECHAT_RC_OK
 
         kserver = str(buffer.split(",", 1)[0])
@@ -59,7 +57,6 @@ def wbuffer(reaction, data, command, out, er):
 
         #in private
 
-#        command = "msg {} {}".format(knick, reaction) origineel
         if mode == 'op': command = "op {} {}".format(knick, query)
         if mode == 'deop': command = "deop {} {}".format(knick, query)
         if mode == 'kick': command = "kick {} {}".format(knick, query)
@@ -84,6 +81,7 @@ def wbuffer(reaction, data, command, out, er):
 
 
 ### begin weechat plugin configuration stuff ###
+
 def config_cb(data, option, value):
     """callback when script option is changed."""
     opt = option.split(".")[-1]
@@ -119,7 +117,8 @@ if __name__ == "__main__":
                    "ban_trigger": get_option("ban_trigger"),
                    "voice_trigger": get_option("voice_trigger"),
                    "devoice_trigger": get_option("devoice_trigger")
-                  }  
+                  } 
+                   
 ### end weechat plugin configuration stuff ####
 
 # start
