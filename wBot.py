@@ -101,7 +101,7 @@ if __name__ == "__main__":
                    "op_trigger": get_option("op_trigger"),
                    "kick_trigger": get_option("kick_trigger"),
                    "ban_trigger": get_option("ban_trigger"),
-                   "voice_trigger": get_option("voice_trigger"),
+                   "voice_trigger": get_option("voice_trigger")
                   }  
 ### end weechat plugin configuration stuff ####
 
