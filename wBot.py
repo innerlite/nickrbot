@@ -44,7 +44,8 @@ def wbuffer(reaction, data, command, out, er):
 
     cmdprefix = "/"
     w.command(buffer, cmdprefix + command)
-
+    
+### begin weechat plugin configuration stuff ###
 def config_cb(data, option, value):
     """callback when script option is changed."""
     opt = option.split(".")[-1]
@@ -69,6 +70,7 @@ if __name__ == "__main__":
         options = {"enabled": get_option("enabled"),
                    "hello_trigger": get_option("hello_trigger")
                   }  
+### end weechat plugin configuration stuff ####
 
         # start
         w.hook_signal("*,irc_in_privmsg", "wtrigger", "data")
