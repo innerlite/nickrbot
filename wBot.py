@@ -84,9 +84,11 @@ def get_option(option):
 
 
 plugin_config = "plugins.var.python.{}".format(SCRIPT_NAME)
-default_options = {"enabled": "on",
-                   "op_trigger": "!op",
-                   'kick_trigger': '!kick'}
+default_options = {"enabled": 'on',
+                   "op_trigger": '!op',
+                   'kick_trigger': '!kick',
+                   "ban_trigger": '!ban',
+                   "voice_trigger": '!voice'}
 
 
 if __name__ == "__main__":
