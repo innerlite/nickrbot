@@ -7,10 +7,10 @@ SCRIPT_DESC    = "Weechat Bot Commands"
 import weechat as w
 
 def wtrigger(data, buffer, args):
-    global kserver, kchannel, knick #, mode
+    global kserver, kchannel, knick, mode
     if options["enabled"] == "on":
         try:
-            srvmsg = args.split(" PRIVMSG ", 1)
+            null, srvmsg = args.split(" PRIVMSG ", 1)
         except:
             return w.WEECHAT_RC_OK
         try:
@@ -37,15 +37,16 @@ def wbuffer(reaction, data, command, out, er):
         command = "msg {} {}".format(knick, reaction)
     else:
         #channel
-        command = "msg {} {}".format(kchannel, reaction) 
-#        command = "msg {} hello".format(kchannel, reaction)
+#        command = "msg {} {}".format(kchannel, reaction) <-- origineel
+        command = "msg {} hello".format(kchannel, reaction)
 
 #    w.prnt("", command) <-- test
 
     cmdprefix = "/"
     w.command(buffer, cmdprefix + command)
+
     return w.WEECHAT_RC_OK
-    
+	
 ### begin weechat plugin configuration stuff ###
 def config_cb(data, option, value):
     """callback when script option is changed."""
@@ -76,3 +77,14 @@ if __name__ == "__main__":
         # start
         w.hook_signal("*,irc_in_privmsg", "wtrigger", "data")
         w.hook_config("{}.*".format(plugin_config), "config_cb", "")
+
+
+
+
+
+
+
+
+
+
+
