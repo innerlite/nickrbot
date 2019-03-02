@@ -63,7 +63,7 @@ def wbuffer(reaction, data, command, out, er):
             if mode == 'op': command = "op {} {}".format(kchannel, query)
             if mode == 'kick': command = "kick {} {}".format(kchannel, query)
             if mode == 'ban': command = "ban {} {}".format(kchannel, query)
-            if mode == 'voice': command = "voice {} {}".format(knick, query)       
+            if mode == 'voice': command = "voice {} {}".format(kchannel, query)       
 
     cmdprefix = "/"
     w.command(buffer, cmdprefix + command)
