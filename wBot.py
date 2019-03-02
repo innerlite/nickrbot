@@ -44,9 +44,7 @@ def wtrigger(data, buffer, args):
 #        query = query.replace(" ", "%20")
         query = query.replace(" ", "")
         auto_cmd = " ".format(query)
-
         w.hook_process(auto_cmd, 30 * 1000, "wbuffer", "")
-
     return w.WEECHAT_RC_OK
 
 def wbuffer(reaction, data, command, out, er):
@@ -79,7 +77,6 @@ def wbuffer(reaction, data, command, out, er):
     w.command(buffer, cmdprefix + command)
     return w.WEECHAT_RC_OK
 
-
 ### begin weechat plugin configuration stuff ###
 
 def config_cb(data, option, value):
@@ -88,11 +85,9 @@ def config_cb(data, option, value):
     options[opt] = value
     return w.WEECHAT_RC_OK
 
-
 def get_option(option):
     """returns value of w.option."""
     return w.config_string(w.config_get("{}.{}".format(plugin_config, option)))
-
 
 plugin_config = "plugins.var.python.{}".format(SCRIPT_NAME)
 default_options = {"enabled": 'on',
@@ -102,7 +97,6 @@ default_options = {"enabled": 'on',
                    "ban_trigger": '!ban',
                    "voice_trigger": '!voice',
                    "devoice_trigger": '!devoice'}
-
 
 if __name__ == "__main__":
     if w.register(SCRIPT_NAME, SCRIPT_AUTHOR, SCRIPT_VERSION, SCRIPT_LICENSE, SCRIPT_DESC, "", ""):
@@ -118,9 +112,8 @@ if __name__ == "__main__":
                    "voice_trigger": get_option("voice_trigger"),
                    "devoice_trigger": get_option("devoice_trigger")
                   } 
-                   
+
 ### end weechat plugin configuration stuff ####
 
-# start
 w.hook_signal("*,irc_in_privmsg", "wtrigger", "data")
 w.hook_config("{}.*".format(plugin_config), "config_cb", "")
