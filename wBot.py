@@ -3,9 +3,6 @@ SCRIPT_AUTHOR  = 'innerlite'
 SCRIPT_VERSION = '1.0'
 SCRIPT_LICENSE = 'GPL3'
 SCRIPT_DESC    = 'Weechat Bot Commands'
-execbot_config_file      = None
-execbot_config_section   = {}
-execbot_allows           = {}
 
 import weechat as w
 
