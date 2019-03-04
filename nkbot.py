@@ -14,8 +14,7 @@ def priv_cb(data, signal, signal_data):
     w.prnt('', 'HAL\t' + signal_data)
 #   w.prnt('', 'HAL\t' + nick + ' +++ ' + user + ' +++ ' + host)
     if any(host in s for s in users):
-        cmdprfx = '/'
-        w.command('',cmdprfx + message)
+    w.command('','/' + message)
     return w.WEECHAT_RC_OK
 
 w.hook_signal('*,irc_in2_privmsg', 'priv_cb', '')
