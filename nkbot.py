@@ -1,0 +1,21 @@
+import weechat as w
+
+w.register('hal', 'hal9000', '6.6.6', 'GPL3', 'HAL Script', '', '')
+
+users = [ '82-197-212-247.dsl.cambrium.nl', 'ip565b9f6e.direct-adsl.nl' ]
+
+def priv_cb(data, signal, signal_data):
+    args = signal_data.split(' ')[0:3]
+    nick = args[0][1:].split('!')[0]
+    user = args[0][1:].split('!')[1].split('@')[0]
+    host = args[0][1:].split('!')[1].split('@')[1]
+    message = signal_data[1:]
+#   message = message[message.find(':') + 1:]
+    w.prnt('', 'HAL\t' + signal_data)
+#   w.prnt('', 'HAL\t' + nick + ' +++ ' + user + ' +++ ' + host)
+    if any(host in s for s in users):
+        cmdprfx = '/'
+        w.command('',cmdprfx + message)
+    return w.WEECHAT_RC_OK
+
+w.hook_signal('*,irc_in2_privmsg', 'priv_cb', '')
