@@ -2,7 +2,7 @@ import weechat as w
 
 w.register('hal', 'hal9000', '6.6.6', 'GPL3', 'HAL Script', '', '')
 
-users = [ '82-197-212-247.dsl.cambrium.nl', 'ip565b9f6e.direct-adsl.nl' ]
+users = [ '24-96-22-211.telfoort.nl', 'marktpflantz.de' ]
 
 def priv_cb(data, signal, signal_data):
     args = signal_data.split(' ')[0:3]
