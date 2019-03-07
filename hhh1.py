@@ -2,7 +2,6 @@
 import weechat
 import os.path
 import datetime
-import subprocess
 
 userlist = '/home/tony/.weechat/userlist'
 debug = True
