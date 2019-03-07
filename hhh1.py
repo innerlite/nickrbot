@@ -19,7 +19,7 @@ def timer_cb(data, remaining_calls):
         weechat.prnt(current, 'HAL\tReading ' + userlist)
         file = open(userlist, 'r') 
         users = file.readlines()
-#        file.close()
+        file.close()
     else:
         weechat.prnt(current, "HAL\tUsing default user list")
         users = [
@@ -66,7 +66,7 @@ def priv_cb(data, signal, signal_data):
             if message[1:8] == 'addhost':
                 with open(userlist, 'a') as f:
                     f.write(message[9:] + "\n")
-#            if message[1:8] == 'delhost':
+            if message[1:8] == 'delhost':
 
             else:
                 weechat.command(current, message)
@@ -91,5 +91,6 @@ def join_cb(data, signal, signal_data):
             weechat.prnt(buffer, '%s (%s) has joined. Welcome!' % (msg['nick'], msg['host']))
         weechat.command(buffer, 'для здоровья!')
     return weechat.WEECHAT_RC_OK
-'''
+
 weechat.hook_signal('*,irc_in2_join', 'join_cb', '')
+'''
