@@ -4,7 +4,7 @@ import os.path
 import datetime
 
 debug = False
-userlist = '/home/tony/.weechat/userlist'
+userlist = '/home/user/.weechat/userlist'
 users = []
 
 options = {
