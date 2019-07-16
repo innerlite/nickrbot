@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 
+# Channel limiter for weechat
+# This script will limit a channel to the 
+# current number of users plus 5 once every min.
+
 import weechat
 
 weechat.register('rxtx', 'Channel limiter', '0.01', 'GPL3', 'Channel limiter', '', '')
 
 def cl_timer_cb(data, signal, signal_data, remaining_calls):
-    
+
     server = signal.split(",")[0]
     msg = weechat.info_get_hashtable("irc_message_parse", {"message": signal_data})
     buffer = weechat.info_get("irc_buffer", "%s,%s" % (server, msg["channel"]))
