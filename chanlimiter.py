@@ -5,8 +5,6 @@
 
 import weechat
 
-weechat.register('rxtx', 'Channel limiter', '0.01', 'GPL3', 'Channel limiter', '', '')
-
 server_chans = 'ircnet.#cyberworld'
 
 def cl_cmd_cb(data, signal_data):
@@ -14,9 +12,11 @@ def cl_cmd_cb(data, signal_data):
     buffer = weechat.buffer_search("irc", server_chans)
     count = weechat.string_eval_expression("${buffer.nicklist_count}", {"buffer": buffer}, {}, {})
     chan_buffer = weechat.buffer_get_string(buffer, "name").split('.')[1]
+    
     weechat.command(buffer, '/mode ' + chan_buffer + ' +l ' + count)
     return weechat.WEECHAT_RC_OK
 
+weechat.register('rxtx', 'Channel limiter', '0.01', 'GPL3', 'Channel limiter', '', '')
 weechat.hook_timer(60000, 0, 0, 'cl_cmd_cb', '')
 
 # count > total users in nicklist +3 (weechat got 3 extra 'users/groups' more in the nicklist then visible)
