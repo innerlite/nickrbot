@@ -11,9 +11,9 @@ def cl_cmd_cb(data, signal_data):
 
     buffer = weechat.buffer_search("irc", server_chans)
     count = weechat.string_eval_expression("${buffer.nicklist_count}", {"buffer": buffer}, {}, {})
-    chan_buffer = weechat.buffer_get_string(buffer, "name").split('.')[1]
+    target = weechat.buffer_get_string(buffer, "name").split('.')[1]
     
-    weechat.command(buffer, '/mode ' + chan_buffer + ' +l ' + count)
+    weechat.command(buffer, '/mode ' + target + ' +l ' + count)
     return weechat.WEECHAT_RC_OK
 
 weechat.register('rxtx', 'Channel limiter', '0.01', 'GPL3', 'Channel limiter', '', '')
