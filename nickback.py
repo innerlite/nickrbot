@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import weechat 
 
 weechat.register('nickback', 'innerlite', '0.02',
@@ -10,12 +11,13 @@ def get_notify_list():
     common.clear()
     while weechat.infolist_next(infolist):
         nick = weechat.infolist_string(infolist, 'nick')
+#        server = weechat.infolist_string(infolist, 'server_name')
     weechat.infolist_next(infolist)
     weechat.infolist_free(infolist)
 
 def notify_quit_cb(data, signal, signal_data):
     server, nick = signal_data.split(",")
-    buffer = weechat.info_get("irc_buffer", server + ",," + nick)
+    buffer = weechat.info_get("irc_bufferfer", server + ",," + nick)
     if buffer is None:
         return weechat.WEECHAT_RC_OK
     weechat.command(buffer, '/wait 3 /nick ' + nick)
