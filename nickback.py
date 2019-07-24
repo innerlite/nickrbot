@@ -10,7 +10,6 @@ def get_notify_list():
         return
     while weechat.infolist_next(infolist):
         nick = weechat.infolist_string(infolist, 'nick')
-#        server = weechat.infolist_string(infolist, 'server_name')
     weechat.infolist_next(infolist)
     weechat.infolist_free(infolist)
 
