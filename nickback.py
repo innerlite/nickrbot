@@ -8,7 +8,6 @@ def get_notify_list():
     infolist = weechat.infolist_get('irc_notify', "", "")
     if not infolist:
         return
-    common.clear()
     while weechat.infolist_next(infolist):
         nick = weechat.infolist_string(infolist, 'nick')
 #        server = weechat.infolist_string(infolist, 'server_name')
