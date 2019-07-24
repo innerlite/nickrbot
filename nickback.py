@@ -15,7 +15,7 @@ def get_notify_list():
 
 def notify_quit_cb(data, signal, signal_data):
     server, nick = signal_data.split(",")
-    buffer = weechat.info_get("irc_bufferfer", server + ",," + nick)
+    buffer = weechat.info_get("irc_buffer", server + ",," + nick)
     if buffer is None:
         return weechat.WEECHAT_RC_OK
     weechat.command(buffer, '/wait 3 /nick ' + nick)
