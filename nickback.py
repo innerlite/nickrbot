@@ -10,17 +10,16 @@ def get_notify_list():
     common.clear()
     while weechat.infolist_next(infolist):
         nick = weechat.infolist_string(infolist, 'nick')
-#        server = weechat.infolist_string(infolist, 'server_name')
     weechat.infolist_next(infolist)
     weechat.infolist_free(infolist)
 
 def notify_quit_cb(data, signal, signal_data):
     server, nick = signal_data.split(",")
-    buf = weechat.info_get("irc_buffer", server + ",," + nick)
-    if buf is None:
+    buffer = weechat.info_get("irc_bufferfer", server + ",," + nick)
+    if buffer is None:
         return weechat.WEECHAT_RC_OK
-    weechat.command(buf, '/wait 3 /nick ' + nick)
-    weechat.command(buf, '/wait 4 /notify del ' + nick)
+    weechat.command(buffer, '/wait 3 /nick ' + nick)
+    weechat.command(buffer, '/wait 4 /notify del ' + nick)
     return weechat.WEECHAT_RC_OK
 
 def notify_cmd_cb(*args, **kwargs):
